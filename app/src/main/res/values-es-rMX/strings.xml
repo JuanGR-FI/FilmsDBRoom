@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FilmsDBRoom</string>
+    <string name="title_hint">Título</string>
+    <string name="genre_hint">Género</string>
+    <string name="year_hint">Año</string>
+    <string name="stars_hint">Estrellas</string>
+</resources>
