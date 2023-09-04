@@ -1,5 +1,6 @@
 package com.jacgr.filmsdbroom.ui
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,12 +23,12 @@ class FilmAdapter(private val onFilmClicked: (FilmEntity) -> Unit): RecyclerView
                 tvYear.text = film.year
                 tvStars.text = film.stars
                 tvGenre.text = when(film.genre){
-                    0 -> "Terror"
-                    1 -> "Comedy"
-                    2-> "Animation"
-                    3 -> "Romance"
-                    4 -> "Science Fiction"
-                    else -> "Not found"
+                    1 -> binding.root.context.getString(R.string.terror_genre)
+                    2 -> binding.root.context.getString(R.string.comedy_genre)
+                    3-> binding.root.context.getString(R.string.animation_genre)
+                    4 -> binding.root.context.getString(R.string.romance_genre)
+                    5 -> binding.root.context.getString(R.string.science_fiction_genre)
+                    else -> binding.root.context.getString(R.string.not_found_genre)
                 }
             }
         }
@@ -45,11 +46,11 @@ class FilmAdapter(private val onFilmClicked: (FilmEntity) -> Unit): RecyclerView
         holder.bind(film)
 
         when(film.genre) {
-            0 -> holder.rivIcon.setImageResource(R.drawable.ghost)
-            1 -> holder.rivIcon.setImageResource(R.drawable.comedy)
-            2 -> holder.rivIcon.setImageResource(R.drawable.animation)
-            3 -> holder.rivIcon.setImageResource(R.drawable.heart)
-            4 -> holder.rivIcon.setImageResource(R.drawable.science_fiction)
+            1 -> holder.rivIcon.setImageResource(R.drawable.ghost)
+            2 -> holder.rivIcon.setImageResource(R.drawable.comedy)
+            3 -> holder.rivIcon.setImageResource(R.drawable.animation)
+            4 -> holder.rivIcon.setImageResource(R.drawable.heart)
+            5 -> holder.rivIcon.setImageResource(R.drawable.science_fiction)
         }
 
         holder.itemView.setOnClickListener {

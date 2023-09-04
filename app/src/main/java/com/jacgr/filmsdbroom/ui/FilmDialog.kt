@@ -2,10 +2,13 @@ package com.jacgr.filmsdbroom.ui
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Button
+import android.view.View
+import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.jacgr.filmsdbroom.R
@@ -17,6 +20,7 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 
 class FilmDialog(
+    private val context: Context,
     private val newFilm: Boolean = true,
     private var film: FilmEntity = FilmEntity(
         title = "",
@@ -37,6 +41,9 @@ class FilmDialog(
 
     private lateinit var repository: FilmRepository
 
+    private var spinnerFlag = false
+    private var selectedGenre = 0
+
     //Se configura el dialogo inicial
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = FilmDialogBinding.inflate(requireActivity().layoutInflater)
@@ -45,81 +52,98 @@ class FilmDialog(
 
         builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
 
+        val datos = arrayListOf(getString(R.string.choose_genre),
+                                getString(R.string.terror_genre),
+                                getString(R.string.comedy_genre),
+                                getString(R.string.animation_genre),
+                                getString(R.string.romance_genre),
+                                getString(R.string.science_fiction_genre))
+
+        val adapter = ArrayAdapter(requireContext(), R.layout.style_spinner_elements, datos)
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinner.adapter = adapter
+
         binding.apply {
             tietTitle.setText(film.title)
-            tietGenre.setText(film.genre.toString())
             tietYear.setText(film.year)
             tietStars.setText(film.stars)
+
+            spinner.setSelection(film.genre)
+
+            selectedGenre = film.genre
         }
 
         dialog = if(newFilm){
-            buildDialog("Guardar", "Cancelar", {
+            buildDialog(getString(R.string.save_button_text), getString(R.string.cancel_button_text), {
                 //Create (Guardar)
                 film.title = binding.tietTitle.text.toString()
-                film.genre = binding.tietGenre.text.toString().toInt()
                 film.year = binding.tietYear.text.toString()
                 film.stars = binding.tietStars.text.toString()
+
+                film.genre = binding.spinner.selectedItemPosition
 
                 try {
                     lifecycleScope.launch {
                         repository.insertFilm(film)
                     }
-                    message("Juego guardado exitosamente")
+                    message(getString(R.string.film_saved))
 
                     //Actualizar la UI
                     updateUI()
 
                 }catch (e: IOException) {
-                    message("Error al guardar el juego")
+                    message(getString(R.string.error_film_saved))
                     e.printStackTrace()
                 }
             }, {
                 //Cancelar
             })
         }else{
-            buildDialog("Actualizar", "Borrar", {
+            buildDialog(getString(R.string.update_button_text), getString(R.string.delete_button_text), {
                 //Update
                 film.title = binding.tietTitle.text.toString()
-                film.genre = binding.tietGenre.text.toString().toInt()
                 film.year = binding.tietYear.text.toString()
                 film.stars = binding.tietStars.text.toString()
+
+                film.genre = binding.spinner.selectedItemPosition
 
                 try {
                     lifecycleScope.launch {
                         repository.updateFilm(film)
                     }
-                    message("Juego actualizado exitosamente")
+                    message(getString(R.string.film_updated))
 
                     //Actualizar la UI
                     updateUI()
 
                 }catch (e: IOException) {
                     e.printStackTrace()
-                    message("Error al actualizar el juego")
+                    message(getString(R.string.error_film_updated))
                 }
 
             }, {
                 //Delete
 
-                AlertDialog.Builder(requireContext())
-                    .setTitle("Confirmacion")
-                    .setMessage("Realmente deseas eliminar el juego ${film.title}?")
-                    .setPositiveButton("Aceptar"){ _, _ ->
+                AlertDialog.Builder(requireContext(), android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                    .setTitle(getString(R.string.confirmation_dialog_title))
+                    .setMessage(getString(R.string.alert_dialog_message, film.title))
+                    .setPositiveButton(getString(R.string.accept_button_text)){ _, _ ->
                         try {
                             lifecycleScope.launch {
                                 repository.deleteFilm(film)
                             }
-                            message("Juego eliminado exitosamente")
+                            message(context.getString(R.string.film_deleted))
 
                             //Actualizar la UI
                             updateUI()
 
                         }catch (e: IOException) {
                             e.printStackTrace()
-                            message("Error al eliminar el juego")
+                            message(context.getString(R.string.error_film_deleted))
                         }
                     }
-                    .setNegativeButton("Cancelar"){ dialog, _ ->
+                    .setNegativeButton(getString(R.string.cancel_button_text)){ dialog, _ ->
                         dialog.dismiss()
                     }
                     .create()
@@ -154,25 +178,37 @@ class FilmDialog(
             }
 
             override fun afterTextChanged(s: Editable?) {
+                if(!newFilm){
+                    spinnerFlag = true
+                }
                 saveButton?.isEnabled = validateFields()
             }
 
         })
 
-        binding.tietGenre.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        binding.spinner.onItemSelectedListener = object: OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if(position != 0 && selectedGenre != position){
+                    spinnerFlag = true
+                    saveButton?.isEnabled = validateFields()
+                }else{
+                    spinnerFlag = false
+                    saveButton?.isEnabled = validateFields()
+                }
 
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                spinnerFlag = false
                 saveButton?.isEnabled = validateFields()
             }
 
-        })
+        }
 
         binding.tietYear.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -184,6 +220,9 @@ class FilmDialog(
             }
 
             override fun afterTextChanged(s: Editable?) {
+                if(!newFilm){
+                    spinnerFlag = true
+                }
                 saveButton?.isEnabled = validateFields()
             }
 
@@ -199,6 +238,9 @@ class FilmDialog(
             }
 
             override fun afterTextChanged(s: Editable?) {
+                if(!newFilm){
+                    spinnerFlag = true
+                }
                 saveButton?.isEnabled = validateFields()
             }
 
@@ -207,13 +249,15 @@ class FilmDialog(
     }
 
     private fun validateFields(): Boolean {
-        return (binding.tietTitle.text.toString().isNotEmpty() && binding.tietGenre.text.toString().isNotEmpty()
-                && binding.tietYear.text.toString().isNotEmpty() && binding.tietStars.text.toString().isNotEmpty())
+        return (binding.tietTitle.text.toString().isNotEmpty()
+                && binding.tietYear.text.toString().isNotEmpty()
+                && binding.tietStars.text.toString().isNotEmpty() && spinnerFlag)
     }
 
-    private fun buildDialog(btn1Text: String, btn2Text: String, positiveButton: () -> Unit, negativeButton: () -> Unit): Dialog =
-        builder.setView(binding.root)
-            .setTitle("Film")//TODO quitar el hardcoding
+    private fun buildDialog(btn1Text: String, btn2Text: String, positiveButton: () -> Unit, negativeButton: () -> Unit): Dialog {
+
+        return builder.setView(binding.root)
+            .setTitle(getString(R.string.dialog_title))
             .setPositiveButton(btn1Text){ dialog, _ ->
                 //Accion para el boton positivo
                 positiveButton()
@@ -223,6 +267,8 @@ class FilmDialog(
                 negativeButton()
             }
             .create()
+    }
+
 
 
 }

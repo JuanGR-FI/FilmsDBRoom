@@ -4,4 +4,30 @@
     <string name="genre_hint">Genre</string>
     <string name="year_hint">Year</string>
     <string name="stars_hint">Stars</string>
+    <string name="terror_genre">Terror</string>
+    <string name="comedy_genre">Comedy</string>
+    <string name="animation_genre">Animation</string>
+    <string name="romance_genre">Romance</string>
+    <string name="science_fiction_genre">Science Fiction</string>
+    <string name="choose_genre">Genre...</string>
+    <string name="not_found_genre">Not Found</string>
+    <string name="save_button_text">Save</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="update_button_text">Update</string>
+    <string name="delete_button_text">Delete</string>
+    <string name="dialog_title">Film</string>
+    <string name="film_saved">Film saved successfully</string>
+    <string name="error_film_saved">Error saving film</string>
+    <string name="film_updated">Film updated successfully</string>
+    <string name="error_film_updated">Error updating film</string>
+    <string name="film_deleted">Film deleted successfully</string>
+    <string name="error_film_deleted">Error deleting film</string>
+
+    <string name="confirmation_dialog_title">Confirmation</string>
+    <string name="alert_dialog_message">Do you really want to delete %s film?</string>
+    <string name="accept_button_text">Accept</string>
+    <string name="header" translatable="false">Header</string>
+    <string name="no_records">No records!</string>
+
+
 </resources>

@@ -5,4 +5,26 @@
     <string name="genre_hint">Género</string>
     <string name="year_hint">Año</string>
     <string name="stars_hint">Estrellas</string>
+    <string name="terror_genre">Terror</string>
+    <string name="comedy_genre">Comedia</string>
+    <string name="animation_genre">Animación</string>
+    <string name="romance_genre">Romance</string>
+    <string name="science_fiction_genre">Ciencia Ficción</string>
+    <string name="choose_genre">Género...</string>
+    <string name="not_found_genre">No encontrado</string>
+    <string name="save_button_text">Guardar</string>
+    <string name="cancel_button_text">Cancelar</string>
+    <string name="update_button_text">Actualizar</string>
+    <string name="delete_button_text">Borrar</string>
+    <string name="dialog_title">Película</string>
+    <string name="film_saved">Película guardada exitosamente</string>
+    <string name="error_film_saved">Error al guardar la película</string>
+    <string name="film_updated">Película actualizada exitosamente</string>
+    <string name="error_film_updated">Error al actualizar la película</string>
+    <string name="film_deleted">Película eliminada exitosamente</string>
+    <string name="error_film_deleted">Error al eliminar la película</string>
+    <string name="confirmation_dialog_title">Confirmación</string>
+    <string name="alert_dialog_message">¿Realmente quieres eliminar la película %s?</string>
+    <string name="accept_button_text">Aceptar</string>
+    <string name="no_records">¡Sin registros!</string>
 </resources>

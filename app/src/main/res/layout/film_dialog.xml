@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="Header"
+        android:contentDescription="@string/header"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/glasses" />
 
@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
             android:inputType="text"
+            android:maxLength="25"
             android:maxLines="1"
             android:textColor="@color/white">
 
@@ -49,39 +50,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilGenre"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:hint="@string/genre_hint"
-        android:textColorHint="#676767"
-        app:boxBackgroundMode="outline"
-        app:boxCornerRadiusBottomEnd="16dp"
-        app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusTopEnd="16dp"
-        app:boxCornerRadiusTopStart="16dp"
-        app:boxStrokeColor="@color/white"
-        app:hintTextColor="@color/white"
-        app:startIconDrawable="@drawable/ic_genre"
-        app:startIconTint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tietGenre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/white">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/spinner_style" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilYear"
@@ -109,7 +84,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
-            android:inputType="text"
+            android:inputType="number"
+            android:maxLength="4"
             android:maxLines="1"
             android:textColor="@color/white">
 
@@ -143,20 +119,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
-            android:inputType="text"
+            android:inputType="numberDecimal"
+            android:maxLength="3"
             android:maxLines="1"
             android:textColor="@color/white">
 
         </com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Spinner
-        android:background="@drawable/spinner_style"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginVertical="8dp"
-        android:layout_marginHorizontal="16dp" />
-
 
 </LinearLayout>

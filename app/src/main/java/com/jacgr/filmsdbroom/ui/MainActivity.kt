@@ -44,8 +44,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun prepareUI() {
+
         binding.btnAdd.setOnClickListener {
-            val dialog = FilmDialog(updateUI =  {
+            val dialog = FilmDialog(this, updateUI =  {
                 updateUI()
             }, message = {text ->
                 message(text)
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun filmClicked(film: FilmEntity) {
-        val dialog = FilmDialog(newFilm = false, film = film, updateUI = {
+        val dialog = FilmDialog(this, newFilm = false, film = film, updateUI = {
             updateUI()
         }, message = {text ->
             message(text)
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     private fun message(text: String){
         Snackbar.make(binding.cl, text, Snackbar.LENGTH_SHORT)
             .setTextColor(Color.parseColor("#FFFFFF"))
-            .setBackgroundTint(Color.parseColor("#9E1734"))
+            .setBackgroundTint(Color.parseColor("#495057"))
             .show()
     }
 
