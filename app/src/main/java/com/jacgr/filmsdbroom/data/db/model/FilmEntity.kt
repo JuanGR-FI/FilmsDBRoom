@@ -15,7 +15,7 @@ data class FilmEntity(
     var title: String,
 
     @ColumnInfo(name = "film_genre")
-    var genre: String,
+    var genre: Int,
 
     @ColumnInfo(name = "film_year")
     var year: String,
