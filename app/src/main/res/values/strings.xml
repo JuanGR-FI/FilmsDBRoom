@@ -22,12 +22,12 @@
     <string name="error_film_updated">Error updating film</string>
     <string name="film_deleted">Film deleted successfully</string>
     <string name="error_film_deleted">Error deleting film</string>
-
     <string name="confirmation_dialog_title">Confirmation</string>
     <string name="alert_dialog_message">Do you really want to delete %s film?</string>
     <string name="accept_button_text">Accept</string>
     <string name="header" translatable="false">Header</string>
     <string name="no_records">No records!</string>
+    <string name="films_database_room" translatable="false">Films Database Room</string>
 
 
 </resources>
