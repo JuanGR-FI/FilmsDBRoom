@@ -10,7 +10,7 @@
     <string name="animation_genre">Animación</string>
     <string name="romance_genre">Romance</string>
     <string name="science_fiction_genre">Ciencia Ficción</string>
-    <string name="choose_genre">Género...</string>
+    <string name="choose_genre">Género…</string>
     <string name="not_found_genre">No encontrado</string>
     <string name="save_button_text">Guardar</string>
     <string name="cancel_button_text">Cancelar</string>
@@ -26,5 +26,9 @@
     <string name="confirmation_dialog_title">Confirmación</string>
     <string name="alert_dialog_message">¿Realmente quieres eliminar la película %s?</string>
     <string name="accept_button_text">Aceptar</string>
+    <string name="header">Encabezado</string>
     <string name="no_records">¡Sin registros!</string>
+    <string name="add_element">Agregar elemento</string>
+    <string name="genre_selection">Selección de género</string>
+    <string name="image">Imagen</string>
 </resources>

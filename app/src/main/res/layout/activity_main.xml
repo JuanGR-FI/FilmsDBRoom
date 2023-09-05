@@ -35,7 +35,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="#323232"
         android:clickable="true"
-        android:contentDescription="Add element"
+        android:contentDescription="@string/add_element"
         android:focusable="true"
         app:backgroundTint="@color/white"
         app:borderWidth="1dp"

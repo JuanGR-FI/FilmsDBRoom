@@ -31,7 +31,7 @@
                 android:layout_height="132dp"
                 android:layout_margin="8dp"
                 android:background="#252525"
-                android:contentDescription="Image"
+                android:contentDescription="@string/image"
                 android:outlineProvider="bounds"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ghost"
